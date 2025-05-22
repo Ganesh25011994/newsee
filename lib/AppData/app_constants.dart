@@ -19,5 +19,6 @@ class BioMetricResult {
 class FilePickingOptionList {
   final IconData icon;
   final String title;
-  FilePickingOptionList({required this.icon, required this.title});
+  final bool location;
+  FilePickingOptionList({required this.icon, required this.title, required this.location});
 }

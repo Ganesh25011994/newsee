@@ -2,10 +2,11 @@ import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:newsee/Model/loader.dart';
 import 'package:image_cropper/image_cropper.dart';
-
+import 'package:newsee/Utils/pdf_viewer.dart';
 
 /* 
 @author         :   ganeshkumar.b    14/05/2025
@@ -98,6 +99,57 @@ import 'package:image_cropper/image_cropper.dart';
     return null;
   }
 
+   /* 
+  @author         :   ganeshkumar.b   12/05/2025
+  @description    :   this function navigate camera page and return the data
+  @props          :   BuildContext
+  return value    :   it retun the bytes(CameraWithPosition) data
+  */
+  Future<CameraWithPosition?> onCameraTap(BuildContext context, location) async {
+    final Position? curposition;
+    if (location) {
+      curposition = await getLocation(context);
+      print("curposition: $curposition");
+    } else {
+      curposition = null;
+    }
+    final getprofileData =  await context.pushNamed<Uint8List>("camera");
+    if (getprofileData != null) {
+      CameraWithPosition response = CameraWithPosition(curposition: curposition, imagedata: getprofileData);
+      return response;
+    } else {
+      print("poda punnaku");
+      return null;
+    }
+    
+  }
+
+  /* 
+  @author         :   ganeshkumar.b   12/05/2025
+  @description    :   this function call image picker plugin and access gallery and return the image data
+  @props          :   BuildContext
+  return value    :   it retun the bytes(CameraWithPosition) data
+  */
+  Future<CameraWithPosition?> onGalleryTap(BuildContext context) async {
+    final galleyImageBytes = await pickimagefromgallery(context);
+    CameraWithPosition response = CameraWithPosition(curposition: null, imagedata: galleyImageBytes!);
+    return response;
+  }
+
+  onFileTap(BuildContext context) async{
+    final fileBytes = await filePicker();
+    print("fileBytes: $fileBytes");
+    if (fileBytes != null && context.mounted) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PDFViewerFromBytes(
+            filedata: fileBytes),
+        ),
+      );
+    }
+  }
+
   /* 
   @author         :   ganeshkumar.b    14/05/2025
   @description    :   Cropper function used to crop the image pick from camera or gallery.
@@ -150,10 +202,16 @@ import 'package:image_cropper/image_cropper.dart';
 
 
 class CropAspectRatioPresetCustom implements CropAspectRatioPresetData {
-    @override
-    (int, int)? get data => (2, 3);
+  @override
+  (int, int)? get data => (2, 3);
 
-    @override
-    String get name => '2x3 (customized)';
-  }
+  @override
+  String get name => '2x3 (customized)';
+}
+
+class CameraWithPosition {
+  final Position? curposition;
+  final Uint8List imagedata;
+  CameraWithPosition({ required this.curposition, required this.imagedata});
+}
 

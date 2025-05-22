@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newsee/Utils/geolocator.dart';
 import 'package:newsee/feature/saveprofilepicture/repository/model/profilepicturedetails.dart';
 part 'saveprofilepicture_event.dart';
 part 'saveprofilepicture_state.dart';
@@ -14,7 +15,7 @@ class SaveProfilePictureBloc extends Bloc<ProfilPictureEvent, ProfilPictureState
   Future<void> saveCustomerImage(ProilePictureSaveEvent event, Emitter emit) async {
     print("saveCustomerImage: => $event");
     ProfilePictureDetails response = ProfilePictureDetails(
-        imageData: event.profilebytes,
+        imageData: event.profiledata.imagedata,
         leadID: '0001',
       );
     emit(ProfilPictureState(status: LeadStatus.success, profilepicturedetails: response));
