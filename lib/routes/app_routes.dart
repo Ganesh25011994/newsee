@@ -20,6 +20,7 @@ import 'package:newsee/feature/auth/data/datasource/auth_remote_datasource.dart'
 import 'package:newsee/feature/auth/data/repository/auth_repository_impl.dart';
 import 'package:newsee/feature/auth/domain/repository/auth_repository.dart';
 import 'package:newsee/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:newsee/feature/lead_details/presentation/page/lead_details_view.dart';
 import 'package:newsee/pages/home_page.dart';
 import 'package:newsee/pages/newlead_page.dart';
 import 'package:newsee/pages/not_found_error.page.dart';
@@ -54,8 +55,10 @@ final routes = GoRouter(
     GoRoute(
       path: AppRouteConstants.NEWLEAD_PAGE['path']!,
       name: AppRouteConstants.NEWLEAD_PAGE['name'],
-      builder: (context, state) => NewLeadPage(),
+      // builder: (context, state) => NewLeadPage(),
+      builder: (context, state) => LeadDetailsView(),
     ),
+    
     GoRoute(
       path: AppRouteConstants.PROFILE_PAGE['path']!,
       name: AppRouteConstants.PROFILE_PAGE['name'],

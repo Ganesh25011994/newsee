@@ -38,38 +38,6 @@ class ProfilePageState extends State<ProfilePage> {
         onVerticalDragDown: (context) => GoRouter.of(this.context).pop(),
         child: Scaffold(
           appBar: AppBar(
-            // actionsPadding: EdgeInsets.fromLTRB(0, 0, (screenwidth * 0.1), 0),
-            // actions: 
-            //   <Widget>[
-            //     Container(
-            //       height: 40,
-            //       width: 40,
-            //       decoration: BoxDecoration(
-            //         borderRadius: BorderRadius.circular(10)
-            //       ),
-            //       child: Center(
-            //         child: Ink(
-            //           decoration: ShapeDecoration(
-            //             color: Colors.lightBlue,
-            //             shape: CircleBorder()
-            //           ),
-            //           child:  IconButton(
-            //             icon: const Icon(Icons.cancel),
-            //             onPressed: () => {
-            //               // context.read<SaveProfilePictureBloc>().add(
-            //               //   ProilePictureSaveEvent(
-            //               //     profilebytes!
-            //               //   )
-            //               // ),
-            //               context.pop()
-            //               // context.goNamed('newlead')
-            //             }, 
-            //             color: Colors.white,
-            //           ),
-            //         ),
-            //       ),
-            //     )
-            //   ],
             title: Text(
               'Profile Picture',
               style: TextStyle(color: Colors.white),

@@ -8,8 +8,8 @@ import 'package:newsee/feature/saveprofilepicture/profilepicturebloc/saveprofile
 
 final getIt = GetIt.instance;
 
-void dependencyInjection() {
+void setupLocator() {
   getIt.registerFactory<CameraBloc>(() => CameraBloc());
   getIt.registerFactory<LoginBloc>(() => LoginBloc(loginRequest: LoginRequest(username: '', password: '')));
-  getIt.registerSingleton<SaveProfilePictureBloc>(SaveProfilePictureBloc(ProfilPictureState(status: null, profilepicturedetails: null)));
+  getIt.registerLazySingleton<SaveProfilePictureBloc>(() => SaveProfilePictureBloc(ProfilPictureState(status: null, profilepicturedetails: null)));
 }

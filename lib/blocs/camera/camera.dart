@@ -6,12 +6,13 @@ import 'package:newsee/blocs/camera/camera_bloc.dart';
 import 'package:newsee/blocs/camera/camera_event.dart';
 
 class Camera extends StatelessWidget {
-
+  final cameraBloc = GetIt.instance.get<CameraBloc>();
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return BlocProvider.value(
+      value: cameraBloc..add(CameraOpen()),
       // create: (_) => CameraBloc()..add(CameraOpen()),
-      create: (_) => GetIt.instance.get<CameraBloc>()..add(CameraOpen()),
+      // create: (_) => GetIt.instance.get<CameraBloc>()..add(CameraOpen()),
       child: CameraView(),
     );
   }

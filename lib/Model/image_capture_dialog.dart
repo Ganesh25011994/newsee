@@ -1,5 +1,3 @@
-import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:newsee/AppData/app_constants.dart';
 
@@ -18,12 +16,13 @@ showMediaPickerActionSheet(
 ) {
   // return showCupertinoModalPopup(
   return showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) => SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: actions.map((option) {
-            return ListTile(
+    sheetAnimationStyle: AnimationStyle(duration: Duration(milliseconds: 500)),
+    context: context,
+    builder: (BuildContext context) => SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: actions.map((option) {
+          return ListTile(
               leading: Icon(option.icon),
               title: Text(option.title),
               onTap: () {
@@ -34,18 +33,10 @@ showMediaPickerActionSheet(
                 }
               },
             );
-          }).toList()
-        ),
-      )
-        
-        // actions.where((option) => option.title != 'CANCEL').map((picker) => 
-        // BottomSheetAction(
-        //   title: const Text('Document Type'),
-        //   leading: const Text('select document from '),
-        //   onPressed: (context) {}
-        // )
-    
-
+          
+        }).toList()
+      ),
+    )
       
           // (BuildContext context) => (
           //   title: const Text('Document Type'),

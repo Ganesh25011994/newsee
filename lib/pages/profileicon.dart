@@ -45,7 +45,7 @@ class ProfileIcon extends StatelessWidget {
                     final List<FilePickingOptionList> actions = [
                           FilePickingOptionList(title: "CAMERA", icon: Icons.linked_camera, location: false),
                           FilePickingOptionList(title: "GALLERY", icon: Icons.satellite_rounded, location: false),
-                          FilePickingOptionList(title: "View", icon: Icons.visibility, location: false),
+                          FilePickingOptionList(title: "VIEW", icon: Icons.visibility, location: false),
                           FilePickingOptionList(title: "CANCEL", icon: Icons.cancel, location: false)
                         ];
                         final result = await showMediaPickerActionSheet(

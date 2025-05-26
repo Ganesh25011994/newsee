@@ -64,6 +64,7 @@ dependencies:
   url_launcher: ^6.3.1
   # flutter_svg: ^2.1.0
   adaptive_action_sheet: ^2.0.4 
+  accordion: ^2.6.0
 
 dev_dependencies:
   flutter_test:
