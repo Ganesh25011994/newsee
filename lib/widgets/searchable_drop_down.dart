@@ -81,7 +81,9 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T>> {
                 label: RichText(
                   text: TextSpan(
                     text: widget.label,
-                    style: const TextStyle(color: Colors.black, fontSize: 16),
+                    style: const TextStyle(
+                      color: Colors.black, fontSize: 16,
+                    ),
                     children: [
                       if (widget.mantatory == null)
                         const TextSpan(

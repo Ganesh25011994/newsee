@@ -40,7 +40,11 @@ class AppRouteConstants {
     'path': '/ciccheck',
   };
   static const RouteProps IMAGE_VIEW_PAGE = {
-    'name': '  imageview',
+    'name': 'imageview',
     'path': '/imageview',
+  };
+  static const RouteProps FIELD_INVESTIGATION_PAGE = {
+    'name': 'fieldinvestigation',
+    'path': '/fieldinvestigation',
   };
 }

@@ -220,4 +220,33 @@ class AppForms {
       'lasPreToCollect': FormControl<String>(validators: [Validators.required]),
     });
   }
+
+  static FormGroup buildFieldInvestigationDetailsForm() {
+    return FormGroup({
+      'personMeet': FormControl<String>(validators: [Validators.required]),
+      'contactNumber': FormControl<String>(validators: [Validators.required, Validators.maxLength(10), Validators.minLength(10)]),
+      'FIDoneat': FormControl<String>(validators: [Validators.required]),
+      'relationshipOfPerson': FormControl<String>(validators: [Validators.required]),
+      'addrSameAsApplicatntAddr': FormControl<String>(validators: [Validators.required]),
+      'diffAddress': FormControl<String>(validators: [Validators.required]),
+      'originalKYCSeen': FormControl<String>(validators: [Validators.required]),
+      'typeOfHouse': FormControl<String>(validators: [Validators.required]),
+      'feedbackAndBackground': FormControl<String>(validators: [Validators.required]),
+      'otherDetails': FormControl<String>(validators: [Validators.required]),
+      'approachRoattoFarm': FormControl<String>(validators: [Validators.required]),
+      'cropObserved': FormControl<String>(validators: [Validators.required]),
+      'name1': FormControl<String>(validators: [Validators.required]),
+      "address1": FormControl<String>(validators: [Validators.required]),
+      'pincode1': FormControl<String>(validators: [Validators.required, Validators.maxLength(6), Validators.minLength(6)]),
+      'state1': FormControl<String>(validators: [Validators.required]),
+      'contactnumber1': FormControl<String>(validators: [Validators.required, Validators.maxLength(10), Validators.minLength(10)]),
+      'relationship1': FormControl<String>(validators: [Validators.required]),
+      'name2': FormControl<String>(validators: [Validators.required]),
+      "address2": FormControl<String>(validators: [Validators.required]),
+      'pincode2': FormControl<String>(validators: [Validators.required, Validators.maxLength(6), Validators.minLength(6)]),
+      'state2': FormControl<String>(validators: [Validators.required]),
+      'contactnumber2': FormControl<String>(validators: [Validators.required, Validators.maxLength(10), Validators.minLength(10)]),
+      'relationship2': FormControl<String>(validators: [Validators.required]),
+    });
+  }
 }

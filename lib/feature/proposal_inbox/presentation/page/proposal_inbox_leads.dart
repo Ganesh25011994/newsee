@@ -329,6 +329,31 @@ class ProposalInbox extends StatelessWidget {
                 context.pushNamed('document', extra: proposal['propNo']);
               },
             ),
+            OptionsSheet(
+              icon: Icons.description,
+              title: "Field Investigation",
+              subtitle: "Field Investigation Details here",
+              status: status.documentDetails ? 'completed' : 'pending',
+              onTap: () {
+                context.pop();
+                context.pushNamed(
+                  'fieldinvestigation', 
+                  extra: {
+                    'proposalNumber': proposal['propNo'],
+                  },
+                );
+              },
+            ),
+            OptionsSheet(
+              icon: Icons.description,
+              title: "Field Investigation Documents",
+              subtitle: "Field Investigation Document Capture here",
+              status: status.documentDetails ? 'completed' : 'pending',
+              onTap: () {
+                context.pop();
+                context.pushNamed('document', extra: proposal['propNo']);
+              },
+            ),
           ],
         ),
       );

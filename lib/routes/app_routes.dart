@@ -17,6 +17,7 @@ import 'package:newsee/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:newsee/feature/documentupload/presentation/bloc/document_bloc.dart';
 import 'package:newsee/feature/documentupload/presentation/pages/document_page.dart';
 import 'package:newsee/feature/documentupload/presentation/widget/image_view.dart';
+import 'package:newsee/feature/fieldinvestigation/presentation/page/field_invetigation.dart';
 import 'package:newsee/feature/landholding/presentation/page/land_holding_page.dart';
 import 'package:newsee/feature/leadInbox/domain/modal/get_lead_response.dart';
 import 'package:newsee/feature/masters/data/repository/master_repo_impl.dart';
@@ -306,6 +307,44 @@ final routes = GoRouter(
         );
       },
     ),
+    GoRoute(
+      path: AppRouteConstants.FIELD_INVESTIGATION_PAGE['path']!,
+      name: AppRouteConstants.FIELD_INVESTIGATION_PAGE['name'],
+      builder: (context, state) {
+        final proposalnumber =
+            (state.extra as Map<String, dynamic>?)?['proposalNumber'] as String;
+        return PopScope(
+          canPop: false,
+          onPopInvokedWithResult: (didpop, data) async {
+            final shouldPop = await showDialog<bool>(
+              context: context,
+              builder:
+                  (context) => AlertDialog(
+                    title: Text('Confirm'),
+                    content: Text('Do you want to Exit ?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(true),
+                        child: Text('Yes'),
+                      ),
+                    ],
+                  ),
+            );
+            if (shouldPop ?? false) {
+              Navigator.of(context).pop(false);
+              // context.go('/'); // Navigate back using GoRouter
+            }
+          },
+          child: FieldInvetigation(
+            proposalNumber: proposalnumber,
+          ),
+        );
+      }
+    )
   ],
   redirect: (context, state) {
     print(state.fullPath);
