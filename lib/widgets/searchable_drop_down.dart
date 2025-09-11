@@ -62,69 +62,111 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return ReactiveFormField<String, T>(
-      key: widget.fieldKey,
-      formControlName: widget.controlName,
-      validationMessages: {
-        ValidationMessage.required: (error) => '${widget.label} is required',
-      },
-      builder: (field) {
-        return Padding(
-          padding: const EdgeInsets.all(12),
-          child: DropdownSearch<T>(
-            items: widget.items,
-            enabled: field.control.enabled,
-            selectedItem: widget.selItem(),
-            itemAsString: (item) => itemvalueMapper(item),
-            dropdownDecoratorProps: DropDownDecoratorProps(
-              dropdownSearchDecoration: InputDecoration(
-                label: RichText(
-                  text: TextSpan(
-                    text: widget.label,
-                    style: const TextStyle(
-                      color: Colors.black, fontSize: 16,
-                    ),
-                    children: [
-                      if (widget.mantatory == null)
-                        const TextSpan(
-                          text: ' *',
-                          style: TextStyle(color: Colors.red),
-                        ),
-                    ],
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Column(
+        children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5.0),
+              child: RichText(
+                text: TextSpan(
+                  text: widget.label,
+                  style: const TextStyle(
+                    color: Colors.black, fontSize: 16,
+                    fontWeight: FontWeight.bold
                   ),
-                ),
-                errorText: field.errorText,
-                isDense: true,
-                contentPadding: const EdgeInsets.symmetric(vertical: 12),
-                border: const UnderlineInputBorder(),
-                enabledBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey),
-                ),
-                focusedBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.teal),
+                  children: [
+                    if (widget.mantatory == null)
+                      const TextSpan(
+                        text: ' *',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                  ],
                 ),
               ),
             ),
-            popupProps: PopupProps.menu(
-              showSearchBox: true,
-              searchFieldProps: TextFieldProps(
-                autofocus: true,
-                decoration: const InputDecoration(
-                  hintText: 'Search',
-                  border: UnderlineInputBorder(),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          ReactiveFormField<String, T>(
+            key: widget.fieldKey,
+            formControlName: widget.controlName,
+            validationMessages: {
+              ValidationMessage.required: (error) => '${widget.label} is required',
+            },
+            builder: (field) {
+              return Padding(
+                padding: const EdgeInsets.all(2),
+                child: DropdownSearch<T>(
+                  items: widget.items,
+                  enabled: field.control.enabled,
+                  selectedItem: widget.selItem(),
+                  itemAsString: (item) => itemvalueMapper(item),
+                  dropdownDecoratorProps: DropDownDecoratorProps(
+                    dropdownSearchDecoration: InputDecoration(
+                      filled: true, // Enables background color
+                      fillColor: Colors.grey.shade100, // Your background shade
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none, // Remove default border
+                      ),
+                      // label: RichText(
+                      //   text: TextSpan(
+                      //     text: widget.label,
+                      //     style: const TextStyle(
+                      //       color: Colors.black, fontSize: 16,
+                      //     ),
+                      //     children: [
+                      //       if (widget.mantatory == null)
+                      //         const TextSpan(
+                      //           text: ' *',
+                      //           style: TextStyle(color: Colors.red),
+                      //         ),
+                      //     ],
+                      //   ),
+                      // ),
+                      hintText: 'Select ${widget.label}',
+                      hintStyle: TextStyle(
+                        color: Colors.grey
+                      ),
+                      errorText: field.errorText,
+                      isDense: true,
+                      contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+                      // border: const UnderlineInputBorder(),
+                      // enabledBorder: const UnderlineInputBorder(
+                      //   borderSide: BorderSide(color: Colors.grey),
+                      // ),
+                      focusedBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.teal),
+                      ),
+                    ),
+                  ),
+                  popupProps: PopupProps.menu(
+                    showSearchBox: true,
+                    searchFieldProps: TextFieldProps(
+                      autofocus: true,
+                      decoration: const InputDecoration(
+                        hintText: 'Search',
+                        border: UnderlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                  onChanged: (val) {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                    if (val != null) {
+                      print('field value => ${itemvalueMapper(val)}');
+                    }
+                    _onChangeListener(val);
+                  },
                 ),
-              ),
-            ),
-            onChanged: (val) {
-              FocusScope.of(context).requestFocus(FocusNode());
-              if (val != null) {
-                print('field value => ${itemvalueMapper(val)}');
-              }
-              _onChangeListener(val);
+              );
             },
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }

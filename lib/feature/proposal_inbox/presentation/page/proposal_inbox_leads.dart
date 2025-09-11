@@ -273,90 +273,192 @@ class ProposalInbox extends StatelessWidget {
     );
   }
 
+  // void _showBottomSheet(BuildContext context, Map<String, dynamic> proposal, ApplicationStatusResponse status) {
+  //   openBottomSheet(context, 0.6, 0.4, 0.9, (context, scrollController) {
+  //     return SingleChildScrollView(
+  //       controller: scrollController,
+  //       child: Column(
+  //         children: [
+  //           const SizedBox(height: 12),
+  //           OptionsSheet(
+  //             icon: Icons.document_scanner,
+  //             title: "CIC Check",
+  //             subtitle: "View your CIC here",
+  //             status: status.cibilDetails ? 'completed' : 'pending',
+  //             onTap: () {
+  //               context.pop();
+  //               Navigator.push(
+  //                 context,
+  //                 MaterialPageRoute(builder: (context) => CicCheckPage()),
+  //               );
+  //             },
+  //           ),
+  //           OptionsSheet(
+  //             icon: Icons.landscape,
+  //             title: "Land Details",
+  //             subtitle: "View your Land Details here",
+  //             status: status.landHoldingDetails ? 'completed' : 'pending',
+  //             onTap: () {
+  //               context.pop();
+  //               context.pushNamed(
+  //                 'landholdings',
+  //                 extra: {
+  //                   'applicantName': proposal['applicantName'],
+  //                   'proposalNumber': proposal['propNo'],
+  //                 },
+  //               );
+  //             },
+  //           ),
+  //           OptionsSheet(
+  //             icon: Icons.grass,
+  //             title: "Crop Details",
+  //             subtitle: "View your Crop Details here",
+  //             status: status.ProposedCropDetails ? 'completed' : 'pending',
+  //             onTap: () {
+  //               context.pop();
+  //               context.pushNamed('cropdetails', extra: proposal['propNo']);
+  //             },
+  //           ),
+  //           OptionsSheet(
+  //             icon: Icons.description,
+  //             title: "Document Upload",
+  //             subtitle: "Pre-Sanctioned Documents Upload",
+  //             status: status.documentDetails ? 'completed' : 'pending',
+  //             onTap: () {
+  //               context.pop();
+  //               context.pushNamed('document', extra: proposal['propNo']);
+  //             },
+  //           ),
+  //           OptionsSheet(
+  //             icon: Icons.description,
+  //             title: "Field Investigation",
+  //             subtitle: "Field Investigation Details here",
+  //             status: status.documentDetails ? 'completed' : 'pending',
+  //             onTap: () {
+  //               context.pop();
+  //               context.pushNamed(
+  //                 'fieldinvestigation', 
+  //                 extra: {
+  //                   'proposalNumber': proposal['propNo'],
+  //                 },
+  //               );
+  //             },
+  //           ),
+  //           OptionsSheet(
+  //             icon: Icons.description,
+  //             title: "Field Investigation Documents",
+  //             subtitle: "Field Investigation Document Capture here",
+  //             status: status.documentDetails ? 'completed' : 'pending',
+  //             onTap: () {
+  //               context.pop();
+  //               context.pushNamed('document', extra: proposal['propNo']);
+  //             },
+  //           ),
+  //         ],
+  //       ),
+  //     );
+  //   });
+  // }
+
   void _showBottomSheet(BuildContext context, Map<String, dynamic> proposal, ApplicationStatusResponse status) {
-    openBottomSheet(context, 0.6, 0.4, 0.9, (context, scrollController) {
-      return SingleChildScrollView(
-        controller: scrollController,
-        child: Column(
-          children: [
-            const SizedBox(height: 12),
-            OptionsSheet(
-              icon: Icons.document_scanner,
-              title: "CIC Check",
-              subtitle: "View your CIC here",
-              status: status.cibilDetails ? 'completed' : 'pending',
-              onTap: () {
-                context.pop();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => CicCheckPage()),
+  openBottomSheet(context, 0.6, 0.4, 0.9, (context, scrollController) {
+    final items = [
+      {
+        'icon': Icons.document_scanner,
+        'title': "CIC Check",
+        'subtitle': "View your CIC here",
+        'status': status.cibilDetails ? 'completed' : 'pending',
+        'onTap': () {
+          context.pop();
+          Navigator.push(context, MaterialPageRoute(builder: (context) => CicCheckPage()));
+        }
+      },
+      {
+        'icon': Icons.landscape,
+        'title': "Land Details",
+        'subtitle': "View your Land Details here",
+        'status': status.landHoldingDetails ? 'completed' : 'pending',
+        'onTap': () {
+          context.pop();
+          context.pushNamed('landholdings', extra: {
+            'applicantName': proposal['applicantName'],
+            'proposalNumber': proposal['propNo'],
+          });
+        }
+      },
+      {
+        'icon': Icons.grass,
+        'title': "Crop Details",
+        'subtitle': "View your Crop Details here",
+        'status': status.ProposedCropDetails ? 'completed' : 'pending',
+        'onTap': () {
+          context.pop();
+          context.pushNamed('cropdetails', extra: proposal['propNo']);
+        }
+      },
+      {
+        'icon': Icons.description,
+        'title': "Document Upload",
+        'subtitle': "Pre-Sanctioned Documents Upload",
+        'status': status.documentDetails ? 'completed' : 'pending',
+        'onTap': () {
+          context.pop();
+          context.pushNamed('document', extra: proposal['propNo']);
+        }
+      },
+      {
+        'icon': Icons.description,
+        'title': "Field Investigation",
+        'subtitle': "Field Investigation Details here",
+        'status': status.documentDetails ? 'completed' : 'pending',
+        'onTap': () {
+          context.pop();
+          context.pushNamed('fieldinvestigation', extra: {
+            'proposalNumber': proposal['propNo'],
+          });
+        }
+      },
+      {
+        'icon': Icons.description,
+        'title': "Field Investigation Documents",
+        'subtitle': "Field Investigation Document Capture here",
+        'status': status.documentDetails ? 'completed' : 'pending',
+        'onTap': () {
+          context.pop();
+          context.pushNamed('document', extra: proposal['propNo']);
+        }
+      }
+    ];
+
+    return SingleChildScrollView(
+      controller: scrollController,
+      child: Column(
+        children: [
+          const SizedBox(height: 12),
+          for (int i = 0; i < items.length; i++)
+            TweenAnimationBuilder<double>(
+              tween: Tween<double>(begin: 1, end: 0),
+              duration: Duration(milliseconds: 300 + (i * 100)), // staggered effect
+              builder: (context, value, child) {
+                return Transform.translate(
+                  offset: Offset(0, value * 50), // slide from bottom
+                  child: Opacity(
+                    opacity: 1 - value,
+                    child: child,
+                  ),
                 );
               },
+              child: OptionsSheet(
+                icon: items[i]['icon'] as IconData,
+                title: items[i]['title'] as String,
+                subtitle: items[i]['subtitle'] as String,
+                status: items[i]['status'] as String,
+                onTap: items[i]['onTap'] as VoidCallback,
+              ),
             ),
-            OptionsSheet(
-              icon: Icons.landscape,
-              title: "Land Details",
-              subtitle: "View your Land Details here",
-              status: status.landHoldingDetails ? 'completed' : 'pending',
-              onTap: () {
-                context.pop();
-                context.pushNamed(
-                  'landholdings',
-                  extra: {
-                    'applicantName': proposal['applicantName'],
-                    'proposalNumber': proposal['propNo'],
-                  },
-                );
-              },
-            ),
-            OptionsSheet(
-              icon: Icons.grass,
-              title: "Crop Details",
-              subtitle: "View your Crop Details here",
-              status: status.ProposedCropDetails ? 'completed' : 'pending',
-              onTap: () {
-                context.pop();
-                context.pushNamed('cropdetails', extra: proposal['propNo']);
-              },
-            ),
-            OptionsSheet(
-              icon: Icons.description,
-              title: "Document Upload",
-              subtitle: "Pre-Sanctioned Documents Upload",
-              status: status.documentDetails ? 'completed' : 'pending',
-              onTap: () {
-                context.pop();
-                context.pushNamed('document', extra: proposal['propNo']);
-              },
-            ),
-            OptionsSheet(
-              icon: Icons.description,
-              title: "Field Investigation",
-              subtitle: "Field Investigation Details here",
-              status: status.documentDetails ? 'completed' : 'pending',
-              onTap: () {
-                context.pop();
-                context.pushNamed(
-                  'fieldinvestigation', 
-                  extra: {
-                    'proposalNumber': proposal['propNo'],
-                  },
-                );
-              },
-            ),
-            OptionsSheet(
-              icon: Icons.description,
-              title: "Field Investigation Documents",
-              subtitle: "Field Investigation Document Capture here",
-              status: status.documentDetails ? 'completed' : 'pending',
-              onTap: () {
-                context.pop();
-                context.pushNamed('document', extra: proposal['propNo']);
-              },
-            ),
-          ],
-        ),
-      );
-    });
-  }
+        ],
+      ),
+    );
+  });
+}
 }

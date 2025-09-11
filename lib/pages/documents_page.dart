@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newsee/widgets/drop_down.dart';
+import 'package:newsee/widgets/drop_down_widget.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class DocumentsPage extends StatelessWidget {
@@ -22,12 +23,14 @@ class DocumentsPage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Dropdown(
+                DropDownWidget(
+                  context: context,
                   controlName: 'applicanttype',
                   label: 'Applicant Type',
                   items: [''],
                 ),
-                Dropdown(
+                DropDownWidget(
+                  context: context,
                   controlName: 'document',
                   label: 'Document Classification',
                   items: [

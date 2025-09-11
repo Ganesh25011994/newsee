@@ -6,6 +6,7 @@ import 'package:newsee/feature/dedupe/presentation/bloc/dedupe_bloc.dart';
 import 'package:newsee/feature/draft/draft_service.dart';
 import 'package:newsee/widgets/custom_text_field.dart';
 import 'package:newsee/widgets/drop_down.dart';
+import 'package:newsee/widgets/drop_down_widget.dart';
 import 'package:newsee/widgets/integer_text_field.dart';
 import 'package:newsee/widgets/k_willpopscope.dart';
 import 'package:newsee/widgets/response_widget.dart';
@@ -183,7 +184,8 @@ class DedupeSearch extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Dropdown(
+                        DropDownWidget(
+                          context: context,
                           controlName: 'title',
                           label: 'Title',
                           items: ['Mr', 'Mrs', 'Miss', 'Others'],

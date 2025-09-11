@@ -424,39 +424,72 @@ class _CoApplicantFormBottomSheetState
                                   .controls['relationshipFirm']
                                   ?.updateValue(val.optvalue),
                         ), // relationshipwithfirm
-
                         Padding(
                           padding: const EdgeInsets.all(12.0),
-                          child: ReactiveTextField<String>(
-                            formControlName: 'dob',
-                            validationMessages: {
-                              ValidationMessage.required:
-                                  (error) => 'Date of Birth is required',
-                            },
-                            readOnly: true,
-                            decoration: InputDecoration(
-                              labelText: 'Date Of Birth',
-                              suffixIcon: Icon(Icons.calendar_today),
-                            ),
-                            onTap: (control) async {
-                              final DateTime? pickedDate = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now().subtract(
-                                  Duration(days: 365 * 18),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: RichText(
+                                    text: TextSpan(
+                                      text: 'Date Of Birth',
+                                      style: const TextStyle(
+                                        color: Colors.black, 
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                          text: ' *',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              ReactiveTextField<String>(
+                                formControlName: 'dob',
+                                validationMessages: {
+                                  ValidationMessage.required:
+                                      (error) => 'Date of Birth is required',
+                                },
+                                readOnly: true,
+                                decoration: InputDecoration(
+                                  suffixIcon: Icon(Icons.calendar_today),
+                                  filled: true, // Enables background color
+                                  fillColor: Colors.grey.shade200, // Your background shade
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: BorderSide.none, // Remove default border
+                                  ),
+                                  hintText: 'Select Date of Birth',
+                                  hintStyle: TextStyle(
+                                    color: Colors.grey
+                                  ),
                                 ),
-                                firstDate: DateTime(1900),
-                                lastDate: DateTime.now(),
-                              );
-                              if (pickedDate != null) {
-                                final formatted =
-                                    "${pickedDate.year}-${pickedDate.month.toString().padLeft(2, '0')}-${pickedDate.day.toString().padLeft(2, '0')}";
-                                coAppAndGurantorForm.control('dob').value =
-                                    formatted;
-                              }
-                            },
+                                onTap: (control) async {
+                                  final DateTime? pickedDate = await showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now().subtract(
+                                      Duration(days: 365 * 18),
+                                    ),
+                                    firstDate: DateTime(1900),
+                                    lastDate: DateTime.now(),
+                                  );
+                                  if (pickedDate != null) {
+                                    final formatted =
+                                        "${pickedDate.year}-${pickedDate.month.toString().padLeft(2, '0')}-${pickedDate.day.toString().padLeft(2, '0')}";
+                                    coAppAndGurantorForm.control('dob').value =
+                                        formatted;
+                                  }
+                                },
+                              ),
+                            ],
                           ),
                         ),
-
                         IntegerTextField(
                           controlName: 'primaryMobileNumber',
                           label: 'Primary Mobile Number',

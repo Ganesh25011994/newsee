@@ -30,36 +30,73 @@ class IntegerTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(12.0),
-      child: ReactiveTextField<String>(
-        key: fieldKey,
-        autofocus: false,
-        formControlName: controlName,
-        keyboardType: TextInputType.number,
-        maxLength: maxlength,
-        inputFormatters: [if (isRupeeFormat) Rupeeformatter()],
-        decoration: InputDecoration(
-          label: RichText(
-            text: TextSpan(
-              text: label,
-              style: TextStyle(color: Colors.black, fontSize: 16),
-              children: [
-                TextSpan(
-                  text: mantatory ? ' *' : '',
-                  style: TextStyle(color: Colors.red),
+      child: Column(
+        children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: RichText(
+                text: TextSpan(
+                  text: label,
+                  style: const TextStyle(
+                    color: Colors.black, 
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold
+                  ),
+                  children: [
+                    TextSpan(
+                      text: mantatory ? ' *' : '',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
           ),
-        ),
-        validationMessages: {
-          ValidationMessage.required: (error) => '$label is required',
-          ValidationMessage.pattern: (error) => 'Valid $label is required',
-          ValidationMessage.maxLength:
-              (error) => 'Maximum $maxlength numbers only allowed',
-          ValidationMessage.minLength:
-              (error) => 'Minimum $minlength numbers required',
-          ValidationMessage.max: (error) => 'Loan Amount not allowed',
-        },
+          SizedBox(
+            height: 5,
+          ),
+          ReactiveTextField<String>(
+            key: fieldKey,
+            autofocus: false,
+            formControlName: controlName,
+            keyboardType: TextInputType.number,
+            maxLength: maxlength,
+            inputFormatters: [if (isRupeeFormat) Rupeeformatter()],
+            decoration: InputDecoration(
+              filled: true, // Enables background color
+              fillColor: Colors.grey.shade100, // Your background shade
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none, // Remove default border
+              ),
+              hintText: 'Select $label',
+              hintStyle: TextStyle(
+                color: Colors.grey
+              ),
+              floatingLabelBehavior: FloatingLabelBehavior.never, // Disable floating
+              // label: RichText(
+              //   text: TextSpan(
+              //     text: label,
+              //     style: TextStyle(color: Colors.black, fontSize: 16),
+              //     children: [
+              //       TextSpan(
+              //         text: mantatory ? ' *' : '',
+              //         style: TextStyle(color: Colors.red),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+            ),
+            validationMessages: {
+              ValidationMessage.required: (error) => '$label is required',
+              ValidationMessage.pattern: (error) => 'Valid $label is required',
+              ValidationMessage.maxLength:
+                  (error) => 'Maximum $maxlength numbers only allowed',
+              ValidationMessage.minLength:
+                  (error) => 'Minimum $minlength numbers required',
+              ValidationMessage.max: (error) => 'Loan Amount not allowed',
+            },
+          ),
+        ],
       ),
     );
   }

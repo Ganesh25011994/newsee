@@ -14,6 +14,7 @@ import 'package:newsee/feature/loader/presentation/bloc/global_loading_event.dar
 import 'package:newsee/feature/masters/domain/modal/geography_master.dart';
 import 'package:newsee/feature/masters/domain/modal/lov.dart';
 import 'package:newsee/widgets/alpha_text_field.dart';
+import 'package:newsee/widgets/drop_down_widget.dart';
 import 'package:newsee/widgets/google_maps_card.dart';
 import 'package:newsee/widgets/k_willpopscope.dart';
 import 'package:newsee/widgets/options_sheet.dart';
@@ -301,7 +302,8 @@ class LandHoldingPage extends StatelessWidget {
                                 padding: const EdgeInsets.all(16),
                                 child: Column(
                                   children: [
-                                    Dropdown(
+                                    DropDownWidget(
+                                      context: context,
                                       controlName: 'applicantName',
                                       label: 'Applicant Name / Guarantor',
                                       items: [applicantName],

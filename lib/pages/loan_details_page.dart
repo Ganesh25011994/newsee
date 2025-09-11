@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newsee/widgets/drop_down.dart';
+import 'package:newsee/widgets/drop_down_widget.dart';
 import 'package:newsee/widgets/integer_text_field.dart';
 import 'package:newsee/widgets/searchable_drop_down.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -26,12 +27,14 @@ class LoanDetailsPage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Dropdown(
+                DropDownWidget(
+                  context: context,
                   controlName: 'subcategory',
                   label: 'Sub Category',
                   items: ['', ''],
                 ),
-                Dropdown(
+                DropDownWidget(
+                  context: context,
                   controlName: 'loanproduct',
                   label: 'Loan Product',
                   items: ['', ''],

@@ -10,6 +10,7 @@ import 'package:newsee/feature/masters/domain/repository/geographymaster_crud_re
 import 'package:newsee/widgets/cupertino_expansion_tile.dart';
 import 'package:newsee/widgets/custom_text_field.dart';
 import 'package:newsee/widgets/drop_down.dart';
+import 'package:newsee/widgets/drop_down_widget.dart';
 import 'package:newsee/widgets/integer_text_field.dart';
 import 'package:newsee/widgets/reference_widget.dart';
 import 'package:newsee/widgets/searchable_drop_down.dart';
@@ -229,86 +230,7 @@ class FieldInvetigation extends StatelessWidget {
                             padding: const EdgeInsets.all(16),
                             child: Column(
                               children: [
-                                CustomTextField(
-                                  controlName: 'personMeet',
-                                  label: 'Name of person met during FI',
-                                  mantatory: true,
-                                ),
-                                IntegerTextField(
-                                  controlName: 'contactNumber', 
-                                  label: 'Contact No of person giving information', 
-                                  mantatory: true,
-                                  maxlength: 10,
-                                  minlength: 10,
-                                ),
-                                Dropdown(
-                                  controlName: 'FIDoneat', 
-                                  label: 'Field inspection done at', 
-                                  items: ['Both', 'House', 'Farm']
-                                ),
-                                SearchableDropdown(
-                                  controlName: 'relationshipOfPerson',
-                                  label: 'Relationship of person giving details',
-                                  items: relationShipLov,
-                                  onChangeListener: (Lov val) {
-                                    form.controls['relationshipOfPerson']?.updateValue(
-                                      val.optvalue,
-                                    );
-                                  },
-                                  selItem: () {},
-                                ),
-                                Dropdown(
-                                  controlName: 'addrSameAsApplicatntAddr', 
-                                  label: 'Residing address is same as applicant address', 
-                                  items: ['Yes', 'No']
-                                ),
-                                CustomTextField(
-                                  controlName: 'diffAddress',
-                                  label: 'If different, mention the address, else mention NA',
-                                  mantatory: true,
-                                ),
-                                Dropdown(
-                                  controlName: 'originalKYCSeen', 
-                                  label: 'Whether Original KYC seen & verified', 
-                                  items: ['Yes', 'No']
-                                ),
-                                SearchableDropdown(
-                                  controlName: 'typeOfHouse',
-                                  label: 'Type of House',
-                                  items: typeOfHouseLov,
-                                  onChangeListener: (Lov val) {
-                                    form.controls['typeOfHouse']?.updateValue(
-                                      val.optvalue,
-                                    );
-                                  },
-                                  selItem: () {},
-                                ),
-                                CustomTextField(
-                                  controlName: 'feedbackAndBackground',
-                                  label: 'Market feedback & Background of Applicant',
-                                  mantatory: true,
-                                ),
-                                SearchableDropdown(
-                                  controlName: 'otherDetails',
-                                  label: 'Other details / References',
-                                  items: otherDetailsLov,
-                                  onChangeListener: (Lov val) {
-                                    form.controls['otherDetails']?.updateValue(
-                                      val.optvalue,
-                                    );
-                                  },
-                                  selItem: () {},
-                                ),
-                                Dropdown(
-                                  controlName: 'approachRoattoFarm', 
-                                  label: 'Approach road to farm', 
-                                  items: ['Yes', 'No']
-                                ),
-                                CustomTextField(
-                                  controlName: 'cropObserved',
-                                  label: 'If no crop observed, Narrate the reason for same',
-                                  mantatory: true,
-                                ),
+                                
                                 AnimatedBuilder(
                                   animation: _controller, 
                                   builder: (context,_) {
@@ -317,6 +239,107 @@ class FieldInvetigation extends StatelessWidget {
                                         CupertinoExpansionTile(
                                           icon: Icons.share_location_sharp, 
                                           index: 0,
+                                          controller: _controller,
+                                          title: "FI Details", 
+                                          subtitle: "Field Investigation Details", 
+                                          cardWidthValue: 0,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              CustomTextField(
+                                                controlName: 'personMeet',
+                                                label: 'Name of person met during FI',
+                                                mantatory: true,
+                                              ),
+                                              IntegerTextField(
+                                                controlName: 'contactNumber', 
+                                                label: 'Contact No of person giving information', 
+                                                mantatory: true,
+                                                maxlength: 10,
+                                                minlength: 10,
+                                              ),
+                                              DropDownWidget(
+                                                context: context,
+                                                controlName: 'FIDoneat', 
+                                                label: 'Field inspection done at', 
+                                                items: ['Both', 'House', 'Farm']
+                                              ),
+                                              SearchableDropdown(
+                                                controlName: 'relationshipOfPerson',
+                                                label: 'Relationship of person giving details',
+                                                items: relationShipLov,
+                                                onChangeListener: (Lov val) {
+                                                  form.controls['relationshipOfPerson']?.updateValue(
+                                                    val.optvalue,
+                                                  );
+                                                },
+                                                selItem: () {},
+                                              ),
+                                              DropDownWidget(
+                                                context: context,
+                                                controlName: 'addrSameAsApplicatntAddr', 
+                                                label: 'Residing address is same as applicant address', 
+                                                items: ['Yes', 'No']
+                                              ),
+                                              CustomTextField(
+                                                controlName: 'diffAddress',
+                                                label: 'If different, mention the address, else mention NA',
+                                                mantatory: true,
+                                              ),
+                                              DropDownWidget(
+                                                context: context,
+                                                controlName: 'originalKYCSeen', 
+                                                label: 'Whether Original KYC seen & verified', 
+                                                items: ['Yes', 'No'],
+                                              ),
+                                              SearchableDropdown(
+                                                controlName: 'typeOfHouse',
+                                                label: 'Type of House',
+                                                items: typeOfHouseLov,
+                                                onChangeListener: (Lov val) {
+                                                  form.controls['typeOfHouse']?.updateValue(
+                                                    val.optvalue,
+                                                  );
+                                                },
+                                                selItem: () {},
+                                              ),
+                                              CustomTextField(
+                                                controlName: 'feedbackAndBackground',
+                                                label: 'Market feedback & Background of Applicant',
+                                                mantatory: true,
+                                              ),
+                                              SearchableDropdown(
+                                                controlName: 'otherDetails',
+                                                label: 'Other details / References',
+                                                items: otherDetailsLov,
+                                                onChangeListener: (Lov val) {
+                                                  form.controls['otherDetails']?.updateValue(
+                                                    val.optvalue,
+                                                  );
+                                                },
+                                                selItem: () {},
+                                              ),
+                                              DropDownWidget(
+                                                context: context,
+                                                controlName: 'approachRoattoFarm', 
+                                                label: 'Approach road to farm', 
+                                                items: ['Yes', 'No'],
+                                              ),
+                                              CustomTextField(
+                                                controlName: 'cropObserved',
+                                                label: 'If no crop observed, Narrate the reason for same',
+                                                mantatory: true,
+                                              ),
+                                            ],
+
+                                          )
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        CupertinoExpansionTile(
+                                          icon: Icons.person_add_alt_sharp, 
+                                          index: 1,
                                           controller: _controller,
                                           title: "Reference 1", 
                                           subtitle: "Reference Details 1", 
@@ -331,8 +354,8 @@ class FieldInvetigation extends StatelessWidget {
                                           height: 10,
                                         ),
                                         CupertinoExpansionTile(
-                                          icon: Icons.share_location_sharp,
-                                          index: 1,
+                                          icon: Icons.group_add_sharp,
+                                          index: 2,
                                           controller: _controller, 
                                           title: "Reference 2", 
                                           subtitle: "Reference Details 2", 
